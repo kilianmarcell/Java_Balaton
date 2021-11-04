@@ -89,6 +89,27 @@ public class Balaton {
 
     }
 
+    public int deliPartMaxHomerseklet() {
+        int sor = 0;
+        for (int i = this.sorokSzama - 1; i > 0; i--) {
+            for (int j = this.oszlopokSzama - 1; j > 0; j--) {
+                if (matrix[i][j] != 0) {
+                    sor = i;
+                    i = 0;
+                }
+            }
+        }
+
+        int max = 0;
+
+        for (int i = 0; i < this.oszlopokSzama; i++) {
+            if (matrix[sor][i] >= max) {
+                max = matrix[sor][i];
+            }
+        }
+        return max;
+    }
+
     @Override
     public String toString() {
         String s = "";
@@ -97,7 +118,15 @@ public class Balaton {
 
             for (int j = 0; j < this.oszlopokSzama; j++) {
 
-                s += this.matrix[i][j] + " ";
+                if (this.matrix[i][j] == 0) {
+
+                    s += " " + this.matrix[i][j] + " ";
+
+                } else {
+
+                    s += this.matrix[i][j] + " ";
+
+                }
 
             }
 
