@@ -13,6 +13,9 @@ public class Balaton {
 
     public Balaton() {
 
+        Inicializalas();
+        Beolvas();
+
     }
 
     private void Inicializalas() {
@@ -23,7 +26,7 @@ public class Balaton {
 
             String sor = b.readLine();
             this.sorokSzama = 0;
-            this.oszlopokSzama = sor.split("\t").length;
+            this.oszlopokSzama = sor.split("\t", -1).length;
 
             while (sor != null) {
 
@@ -60,20 +63,23 @@ public class Balaton {
                 for (int i = 0; i < s.length; i++) {
 
                     if (s[i].equals("")) {
+
                         matrix[sorIndex][i] = 0;
+
+                    } else {
+
+                        matrix[sorIndex][i] = Integer.parseInt(s[i]);
+
                     }
-                    matrix[sorIndex][i] = Integer.parseInt(s[i]);
 
                 }
 
                 sorIndex++;
                 sor = b.readLine();
-                this.sorokSzama++;
-                b.close();
 
             }
 
-            this.matrix = new int[this.sorokSzama][this.oszlopokSzama];
+            b.close();
 
         } catch (IOException e) {
 
@@ -85,10 +91,20 @@ public class Balaton {
 
     @Override
     public String toString() {
-        return "Balaton{" +
-                "sorokSzama=" + sorokSzama +
-                ", oszlopokSzama=" + oszlopokSzama +
-                ", matrix=" + Arrays.toString(matrix) +
-                '}';
+        String s = "";
+
+        for (int i = 0; i < this.sorokSzama; i++) {
+
+            for (int j = 0; j < this.oszlopokSzama; j++) {
+
+                s += this.matrix[i][j] + " ";
+
+            }
+
+            s += "\n";
+
+        }
+        
+        return s;
     }
 }
